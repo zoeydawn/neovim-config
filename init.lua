@@ -90,6 +90,9 @@ vim.keymap.set('n', 'gr', builtin.lsp_references, {})
 vim.keymap.set('n', 'gi', builtin.lsp_implementations, {})
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
+-- vim.keymap.set("n", "<leader>ld", require("telescope.builtin").diagnostics, { desc = "List diagnostics" })
+
+-- Format code Keybinding
 vim.keymap.set("n", "<leader>fp", function()
   vim.lsp.buf.format()
 end)
