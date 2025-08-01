@@ -24,7 +24,7 @@ require("lazy").setup({
   -- Syntax Highlighting
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-  -- Prettier and ESLint
+  -- Formatting (Prettier)
   {
     "nvimtools/none-ls.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -44,6 +44,12 @@ require("lazy").setup({
 
   -- File Explorer
   "nvim-tree/nvim-tree.lua",
+
+  -- conform (for ESLint and Prettier)
+  {
+  'stevearc/conform.nvim',
+  opts = {},
+  }
 })
 
 -- Autocomplete Setup
@@ -93,31 +99,40 @@ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
 -- vim.keymap.set("n", "<leader>ld", require("telescope.builtin").diagnostics, { desc = "List diagnostics" })
 
 -- Format code Keybinding
-vim.keymap.set("n", "<leader>fp", function()
-  vim.lsp.buf.format()
-end)
+--vim.keymap.set("n", "<leader>fp", function()
+--  vim.lsp.buf.format()
+--end)
 
 
-
--- For Prettier
-local null_ls = require("null-ls")
-
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.prettier.with({
-      command = "npx",
-      args = { "prettier", "--stdin-filepath", "$FILENAME" },
-    }),
+-- Prettier
+require("conform").setup({
+  formatters_by_ft = {
+    javascript = { "prettier" },
+    typescript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescriptreact = { "prettier" },
+    json = { "prettier" },
+    css = { "prettier" },
   },
 })
 
-
--- To run Prettier on save:
+-- Format on save:
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.json", "*.css", "*.html" },
-  callback = function()
-    vim.lsp.buf.format({ async = false })
+  pattern = "*",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
   end,
 })
 
+
+-- ESLint
+require("lspconfig").eslint.setup({
+  on_attach = function(client, bufnr)
+    -- optional: auto-fix on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
 
