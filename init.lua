@@ -24,12 +24,6 @@ require("lazy").setup({
   -- Syntax Highlighting
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-  -- Formatting (Prettier)
-  {
-    "nvimtools/none-ls.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
-
   -- LSP & Autocomplete
   "neovim/nvim-lspconfig",
   "hrsh7th/nvim-cmp",
@@ -96,12 +90,17 @@ vim.keymap.set('n', 'gr', builtin.lsp_references, {})
 vim.keymap.set('n', 'gi', builtin.lsp_implementations, {})
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
--- vim.keymap.set("n", "<leader>ld", require("telescope.builtin").diagnostics, { desc = "List diagnostics" })
+vim.keymap.set("n", "<leader>ld", require("telescope.builtin").diagnostics, { desc = "List diagnostics" })
 
 -- Format code Keybinding
---vim.keymap.set("n", "<leader>fp", function()
---  vim.lsp.buf.format()
---end)
+vim.keymap.set("n", "<leader>i", function()
+  require("conform").format({ async = true, lsp_fallback = true })
+end, { desc = "Format buffer" })
+
+-- Keybinding to run EslintFixAll
+vim.keymap.set("n", "<leader>e", function()
+  vim.cmd("EslintFixAll")
+end, { desc = "Run ESLint autofix" })
 
 
 -- Prettier
@@ -129,10 +128,22 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 require("lspconfig").eslint.setup({
   on_attach = function(client, bufnr)
     -- optional: auto-fix on save
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
+    --vim.api.nvim_create_autocmd("BufWritePre", {
+    --  buffer = bufnr,
+    --  command = "EslintFixAll",
+    --})
+
+    -- disable formatting because we're using Prettier for that
+    client.server_capabilities.documentFormattingProvider = false
   end,
 })
+
+
+-- Virtual text for errors and warnings 
+--vim.diagnostic.config({
+--  virtual_text = true,
+--  signs = true,
+--  underline = true,
+--  update_in_insert = false,
+--})
 
