@@ -15,7 +15,11 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins Setup
 require("lazy").setup({
   -- UI & Themes
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  {
+    "Integralist/hart-foundation",
+    lazy = false,
+    priority = 1000,
+  },
 
   -- File Navigation
   "nvim-telescope/telescope.nvim",
@@ -58,17 +62,9 @@ cmp.setup({
 })
 
 -- Theme Setup
-vim.cmd.colorscheme "catppuccin-frappe"  -- or "latte", "pinkish" and soft
+vim.o.background = "dark"
+vim.cmd.colorscheme("hart-foundation")
 
-require("catppuccin").setup({
-  flavour = "frappe",
-  integrations = {
-    treesitter = true,
-    telescope = true,
-    nvimtree = true,
-    -- lualine = true, -- this causes an error. try removing the commment after the next catppuccin update 
-  },
-})
 
 -- TypeScript Setup:
 -- make sure to install ts and ts-server globally:
