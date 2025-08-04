@@ -47,7 +47,9 @@ require("lazy").setup({
   {
   'stevearc/conform.nvim',
   opts = {},
-  }
+  },
+
+  { "numToStr/Comment.nvim", opts = {} }
 })
 
 -- Autocomplete Setup
@@ -87,6 +89,16 @@ vim.keymap.set('n', 'gi', builtin.lsp_implementations, {})
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
 vim.keymap.set("n", "<leader>ld", require("telescope.builtin").diagnostics, { desc = "List diagnostics" })
+vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+
+-- Git Keybindings
+vim.keymap.set("n", "<leader>gp", require("gitsigns").preview_hunk, { desc = "Preview git hunk" })
+vim.keymap.set("n", "<leader>gd", require("gitsigns").diffthis, { desc = "Show file diff" })
+
+vim.keymap.set("n", "<leader>gq", function()
+  vim.cmd("diffoff!")   -- turn off diff mode in all windows
+  vim.cmd("only")       -- close all other splits, keep current one
+end, { desc = "Quit diff view" })
 
 -- Format code Keybinding
 vim.keymap.set("n", "<leader>i", function()
@@ -97,6 +109,38 @@ end, { desc = "Format buffer" })
 vim.keymap.set("n", "<leader>e", function()
   vim.cmd("EslintFixAll")
 end, { desc = "Run ESLint autofix" })
+
+-- Navigation keybindings:
+-- Split navigation with Alt + h/j/k/l
+vim.keymap.set('n', '<A-h>', '<C-w>h', { desc = "Move to left split" })
+vim.keymap.set('n', '<A-j>', '<C-w>j', { desc = "Move to below split" })
+vim.keymap.set('n', '<A-k>', '<C-w>k', { desc = "Move to above split" })
+vim.keymap.set('n', '<A-l>', '<C-w>l', { desc = "Move to right split" })
+
+-- Resize splits with Alt + Shift + h/j/k/l
+vim.keymap.set('n', '<A-H>', ':vertical resize -2<CR>', { desc = "Decrease split width" })
+vim.keymap.set('n', '<A-L>', ':vertical resize +2<CR>', { desc = "Increase split width" })
+vim.keymap.set('n', '<A-K>', ':resize -2<CR>', { desc = "Decrease split height" })
+vim.keymap.set('n', '<A-J>', ':resize +2<CR>', { desc = "Increase split height" })
+
+-- Go back to previous buffer
+vim.keymap.set('n', 'gb', '<C-^>', { desc = "Go back to previous buffer" })
+
+-- Auto-import
+vim.keymap.set("n", "<leader>oi", function()
+  vim.lsp.buf.execute_command({
+    command = "_typescript.organizeImports",
+    arguments = { vim.api.nvim_buf_get_name(0) },
+  })
+end, { desc = "Organize imports" })
+
+-- commenting
+require("Comment").setup()
+vim.keymap.set("n", "<leader>/", function()
+  require("Comment.api").toggle.linewise.current()
+end, { desc = "Toggle comment on line" })
+
+vim.keymap.set("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", { desc = "Toggle comment on selection" })
 
 
 -- Prettier
