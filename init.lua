@@ -56,6 +56,10 @@ require("lazy").setup({
   { "numToStr/Comment.nvim", opts = {} }
 })
 
+-- file tree 
+require("nvim-tree").setup()
+
+
 -- Autocomplete Setup
 local cmp = require("cmp")
 cmp.setup({
@@ -137,6 +141,9 @@ vim.keymap.set("n", "<leader>oi", function()
     arguments = { vim.api.nvim_buf_get_name(0) },
   })
 end, { desc = "Organize imports" })
+
+-- nvm tree
+vim.keymap.set("n", "<leader>nt", ":NvimTreeToggle<CR>", { desc = "Toggle file tree" })
 
 -- commenting
 require("Comment").setup()
