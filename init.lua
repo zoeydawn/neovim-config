@@ -12,6 +12,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- show file numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
+
 -- Plugins Setup
 require("lazy").setup({
   -- UI & Themes
