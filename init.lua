@@ -131,6 +131,13 @@ vim.keymap.set('n', '<A-L>', ':vertical resize +2<CR>', { desc = "Increase split
 vim.keymap.set('n', '<A-K>', ':resize -2<CR>', { desc = "Decrease split height" })
 vim.keymap.set('n', '<A-J>', ':resize +2<CR>', { desc = "Increase split height" })
 
+-- Tab management keybindings
+vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", { desc = "Open new tab" })
+vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { desc = "Close current tab" })
+vim.keymap.set("n", "<leader>to", ":tabonly<CR>", { desc = "Close all other tabs" })
+vim.keymap.set("n", "<leader>tl", ":tabnext<CR>", { desc = "Go to next tab" })
+vim.keymap.set("n", "<leader>th", ":tabprevious<CR>", { desc = "Go to previous tab" })
+
 -- Go back to previous buffer
 vim.keymap.set('n', 'gb', '<C-^>', { desc = "Go back to previous buffer" })
 
