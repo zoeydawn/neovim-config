@@ -105,7 +105,7 @@ vim.keymap.set("n", "<leader>gd", require("gitsigns").diffthis, { desc = "Show f
 
 vim.keymap.set("n", "<leader>gq", function()
   vim.cmd("diffoff!")   -- turn off diff mode in all windows
-  vim.cmd("only")       -- close all other splits, keep current one
+  -- vim.cmd("only")       -- close all other splits, keep current one
 end, { desc = "Quit diff view" })
 
 -- Format code Keybinding
