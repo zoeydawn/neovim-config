@@ -167,6 +167,7 @@ vim.cmd.colorscheme("hart-foundation")
 
 ---
 
+### File tree
 | Keys             | Action            |
 |------------------|-------------------|
 | `<leader>nt`     | Toggle file tree  |
