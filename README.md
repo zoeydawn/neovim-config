@@ -153,3 +153,24 @@ vim.cmd.colorscheme("hart-foundation")
 | `<leader>gp`   | Preview current hunk        |
 | `<leader>gd`   | Show file diff              |
 | `<leader>gq`   | Quit diff view              |
+
+---
+
+### Tabs
+| Keys           | Action                  |
+|----------------|-------------------------|
+| `<leader>tn`   | New tab                 |
+| `<leader>tc`   | Close current tab       |
+| `<leader>to`   | Close all other tabs    |
+| `<leader>tl`   | Next tab                |
+| `<leader>th`   | Previous tab            |
+
+---
+
+| Keys             | Action            |
+|------------------|-------------------|
+| `<leader>nt`     | Toggle file tree  |
+| `C-v (Ctrl + v)` | Vertical split    |
+| `C-x (Ctrl + x)` | Horizontal split  |
+| `C-t (Ctrl + t)` | Open in new tab   |
+
