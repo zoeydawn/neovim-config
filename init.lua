@@ -53,7 +53,19 @@ require("lazy").setup({
   opts = {},
   },
 
-  { "numToStr/Comment.nvim", opts = {} }
+  { "numToStr/Comment.nvim", opts = {} },
+  { "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim", -- optional
+      "nvim-telescope/telescope.nvim"
+    }
+   }
 })
 
 -- file tree 
