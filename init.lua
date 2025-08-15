@@ -53,7 +53,31 @@ require("lazy").setup({
   opts = {},
   },
 
-  { "numToStr/Comment.nvim", opts = {} }
+  { "numToStr/Comment.nvim", opts = {} },
+  { 
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim", -- optional
+      "nvim-telescope/telescope.nvim"
+    }
+   },
+   {
+    "Exafunction/windsurf.nvim",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "hrsh7th/nvim-cmp",
+    },
+    config = function()
+        require("codeium").setup({
+        })
+    end
+   }
 })
 
 -- file tree 
@@ -67,9 +91,16 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
   sources = {
+    { name = "codeium" },
     { name = "nvim_lsp" },
+    { name = "buffer" },
+    { name = "path" },
   },
+  -- experimental = {
+  --   ghost_text = true,
+  -- },
 })
+
 
 -- Theme Setup
 vim.o.background = "dark"
