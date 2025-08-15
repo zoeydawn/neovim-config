@@ -160,6 +160,9 @@ end, { desc = "Toggle comment on line" })
 
 vim.keymap.set("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", { desc = "Toggle comment on selection" })
 
+-- Map <Esc> to exit terminal mode
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
+
 
 -- Prettier
 require("conform").setup({
