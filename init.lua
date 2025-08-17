@@ -170,7 +170,7 @@ vim.keymap.set("n", "<leader>tl", ":tabnext<CR>", { desc = "Go to next tab" })
 vim.keymap.set("n", "<leader>th", ":tabprevious<CR>", { desc = "Go to previous tab" })
 
 -- Go back to previous buffer
-vim.keymap.set('n', 'gb', '<C-^>', { desc = "Go back to previous buffer" })
+vim.keymap.set("n", "<leader>gb", "<cmd>b#<CR>", { desc = "Go back to previous buffer" })
 
 -- Auto-import
 vim.keymap.set("n", "<leader>oi", function()
