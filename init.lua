@@ -53,6 +53,10 @@ require("lazy").setup({
   opts = {},
   },
 
+    -- Rust syntax + basic tooling
+  { "rust-lang/rust.vim", ft = "rust" },
+  { "mrcjkb/rustaceanvim", ft = "rust" },
+
   { "numToStr/Comment.nvim", opts = {} },
   { 
     "jackMort/ChatGPT.nvim",
@@ -105,6 +109,11 @@ cmp.setup({
 -- Theme Setup
 vim.o.background = "dark"
 vim.cmd.colorscheme("hart-foundation")
+
+
+-- filetype plugin detection
+vim.cmd("syntax enable")
+vim.cmd("filetype plugin indent on")
 
 
 -- TypeScript Setup:
