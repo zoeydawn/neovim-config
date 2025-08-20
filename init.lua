@@ -16,6 +16,9 @@ vim.opt.rtp:prepend(lazypath)
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- autoformat rust files on save
+vim.g.rustfmt_autosave = 1
+
 -- Plugins Setup
 require("lazy").setup({
   -- UI & Themes
@@ -217,6 +220,7 @@ require("conform").setup({
     typescriptreact = { "prettier" },
     json = { "prettier" },
     css = { "prettier" },
+    rust = { "rustfmt" },
   },
 })
 
