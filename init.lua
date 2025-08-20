@@ -211,6 +211,12 @@ vim.keymap.set("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", { des
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 
+-- run clippy 
+-- vim.keymap.set("n", "<leader>rc", function()
+--   vim.cmd("!cargo clippy")
+-- end, { desc = "Run cargo clippy" })
+
+
 -- Prettier
 require("conform").setup({
   formatters_by_ft = {
@@ -247,6 +253,17 @@ require("lspconfig").eslint.setup({
   end,
 })
 
+
+-- rust analyzer
+require("lspconfig").rust_analyzer.setup({
+  settings = {
+    ["rust-analyzer"] = {
+      check = {
+        command = "clippy", -- ✅ use cargo clippy instead of cargo check
+      },
+    },
+  },
+})
 
 -- Virtual text for errors and warnings 
 --vim.diagnostic.config({
