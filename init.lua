@@ -178,8 +178,12 @@ vim.keymap.set("n", "<leader>to", ":tabonly<CR>", { desc = "Close all other tabs
 vim.keymap.set("n", "<leader>tl", ":tabnext<CR>", { desc = "Go to next tab" })
 vim.keymap.set("n", "<leader>th", ":tabprevious<CR>", { desc = "Go to previous tab" })
 
--- Go back to previous buffer
+-- Buffer management
 vim.keymap.set("n", "<leader>gb", "<cmd>b#<CR>", { desc = "Go back to previous buffer" })
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete current buffer" })
+
 
 -- Auto-import
 vim.keymap.set("n", "<leader>oi", function()
